@@ -408,9 +408,9 @@ function loadExtensions(library)
 	local extfiles = {}
 	local exts = {}
 	for _, path in ext do
-		if (isfile and isfile(v) or not isfolder(v)) then
-			if v:sub(#v-3,#v) == ".mhe" or v:sub(#v-3,#v) == ".lua" then
-				table.insert(extfiles, v)
+		if (isfile and isfile(path) or not isfolder(path)) then
+			if path:sub(#path-3,#path) == ".mhe" or path:sub(#path-3,#path) == ".lua" then
+				table.insert(extfiles, path)
 			end
 		end
 	end

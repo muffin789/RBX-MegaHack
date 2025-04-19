@@ -82,6 +82,7 @@ local MHGui
 	TextBox_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 	TextBox_2.TextSize = 19.000
 	TextBox_2.TextXAlignment = Enum.TextXAlignment.Left
+	TextBox_2.ClipsDescendants = true
 
 	UIPadding_2.Parent = Container
 	UIPadding_2.PaddingLeft = UDim.new(0, 5)
@@ -771,6 +772,7 @@ function module:Init()
 	MHv6:NewInput("Search:", "", function(input)
 		print(input)
 	end)
+	MHv6:NewLabel(`Extensions: {#extensions}/7`)
 	MHv6:NewToggle("Auto Save", function(value)
 		print(value)
 	end, {Small = true})
@@ -785,17 +787,6 @@ function module:Init()
 	end)
 	
 	MHv6:Update()
-	
-	local Extensions = self:NewCategory("Extensions")
-	Extensions:NewLabel(`Loaded: {#extensions}/7`)
-	Extensions:NewButton("Extensions Folder", function()
-		print("Navigating")
-	end)
-	Extensions:NewButton("Find Extensions", function()
-		print("idk how to")
-	end)
-	
-	Extensions:Update()
 	
 	DisplayAnimation()
 	

@@ -416,7 +416,7 @@ function loadExtensions(library)
 	end
 	for _, path in extfiles do
 		if #exts >= 7 then break end
-		local s, extension = pcall(loadstring, readfile(path)))
+		local s, extension = pcall(loadstring, readfile(path))
 		if not s then
 			warn("Failed to load extension", path, ", error message:", extension)
 			continue

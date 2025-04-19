@@ -667,7 +667,7 @@ function module.new(data)
 	self.AnimationSpeed = data.AnimationSpeed or 0.5
 	self.Color = data.Color or {
 		Accent = Color3.fromRGB(239, 127, 99),
-		White = Color3.fromRGB(255, 255, 256)
+		White = Color3.fromRGB(255, 255, 255)
 	}
 	
 	return setmetatable(self, module)

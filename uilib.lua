@@ -401,6 +401,38 @@ function DisplayAnimation()
 	MegaHackAnimation:Destroy()
 end
 
+function loadExtensions(library)
+	makefolder("mhv6")
+	makefolder("mhv6/extensions")
+	local ext = listfiles("mhv6/extensions")
+	local extfiles = {}
+	local exts = {}
+	for _, path in ext do
+		if (isfile and isfile(v) or not isfolder(v)) then
+			if v:sub(#v-3,#v) == ".mhe" or v:sub(#v-3,#v) == ".lua" then
+				table.insert(extfiles, v)
+			end
+		end
+	end
+	for _, path in extfiles do
+		if #exts >= 7 then break end
+		local s, extension = pcall(loadstring, readfile(path)))
+		if not s then
+			warn("Failed to load extension", path, ", error message:", extension)
+			continue
+		end
+		local fenv = getfenv(extension)
+		fenv.MHv6 = library
+		fenv.MHv7 = library
+		setfenv(extension, fenv)
+		table.insert(exts, {
+			func = extension,
+			thread = task.spawn(extension)
+		})
+	end
+	return exts
+end
+
 
 --// Class definitions
 local Toggle, Button, TextBox, Label
@@ -728,6 +760,7 @@ function module:Init()
 	end
 	MHGui.Enabled = false
 	self.SETUP_FLAG = true
+	local extensions = loadExtensions(self)
 	
 	task.delay(2, function()
 		RunService.RenderStepped:Wait()
@@ -754,7 +787,7 @@ function module:Init()
 	MHv6:Update()
 	
 	local Extensions = self:NewCategory("Extensions")
-	Extensions:NewLabel("Loaded: 0/7")
+	Extensions:NewLabel(`Loaded: {#extensions}/7`)
 	Extensions:NewButton("Extensions Folder", function()
 		print("Navigating")
 	end)
